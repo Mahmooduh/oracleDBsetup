@@ -1,6 +1,6 @@
-services:
+ services:
   database:
-    build:
+    build: 
       context: .
       dockerfile: Dockerfile.db
     container_name: oracle-21c-apex
@@ -17,40 +17,37 @@ services:
     networks:
       - apex-network
     healthcheck:
-      test: [ "CMD", "healthcheck.sh" ]
+      test: ["CMD", "healthcheck.sh"]
       interval: 1m
       timeout: 30s
       retries: 3
       start_period: 10m
 
   ords:
-    image: container-registry.oracle.com/database/ords:latest
-    container_name: oracle-ords
-    ports:
-      - "8080:8080"
-    environment:
-      - DBHOST=database
-      - DBPORT=1521
-      - DBSERVICENAME=XEPDB1
-      - ORACLE_PWD=SecretPassword123!
-      - ORDS_PWD=SecretPassword123!
-      - ORDS_CONFIG=/etc/ords/config
-      - ORDS_D_STANDALONE_STATIC_PATH=/i
-      - REST_SERVICES_APEX=true
-    volumes:
-      - ords-config:/etc/ords/config
-      - apex-images:/i
-    depends_on:
-      database:
-        condition: service_healthy
-    networks:
-      - apex-network
+  image: container-registry.oracle.com/database/ords:latest
+  container_name: oracle-ords
+  ports:
+    - "8080:8080"
+  environment:
+    - DBHOST=database
+    - DBPORT=1521
+    - DBSERVICENAME=XEPDB1
+    - ORACLE_PWD=SecretPassword123!
+    - ORDS_PWD=SecretPassword123!
+    - APEX_IMAGES=/opt/oracle/apex/images   # ✅ Important
+  volumes:
+    - ords-config:/etc/ords/config          # ✅ Correct path
+    - apex-images:/opt/oracle/apex/images   # ✅ Same images volume
+  depends_on:
+    database:
+      condition: service_healthy
+  networks:
+    - apex-network
 
 volumes:
   oracle-data:
   ords-config:
   apex-images:
-
 
 networks:
   apex-network:
