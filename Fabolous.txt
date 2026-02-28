@@ -1,0 +1,74 @@
+ssh root@62.171.191.149
+Fabtech@2026
+
+sudo apt update
+pwd (path address)
+cd .ssh (secret key path)
+cat id_rsa
+pm2 list
+cat authorized_keys (person added)
+nano .env   (secret key to configure)
+
+pm2 list
+
+
+For react
+npm i for dependencies
+npm run build 
+npm run dev (for testing and port checking)
+
+
+AWS
+Create ec2
+Elastic IPs (same IP, IP doesn't change)
+3.150.59.23
+
+ssh-keygen -t ed25519 -b 4096 -C "ubuntu@3.150.59.23"   (ssh keys generation for cloning the repo)
+
+authorized_keys  id_ed25519  id_ed25519.pub
+
+For cloning the repo from github, first we have to copy .pub keys that we generat and paste it to authorze keys,
+then we have to add these public into account github ssh and cpgs section
+git clone repo
+inbound rules add (Custom TCP 5173 0.0.0.0/0)
+
+npm i (for installation of dependencies for react project and node)
+npm run build 
+npm run dev (for testing and port checking)
+
+Nginix configration (chat gpt)
+cd /etc/nginx/sites-available
+sudo nano (name folder)
+ 
+cd dist/    (update the path accordingly in config file)
+ubuntu@ip-172-31-2-37:~/AgentWiz-React/dist$ pwd
+/home/ubuntu/AgentWiz-React/dist
+
+sudo nano agentwiz.thefabulousshow.com 
+ubuntu@ip-172-31-2-37:/etc/nginx/sites-available$ nslookup agentwiz.thefabulousshow.com
+
+ sudo ln -s /etc/nginx/sites-available/agentwiz.thefabulousshow.com /etc/nginx/sites-enabled   (sim link)
+ubuntu@ip-172-31-2-37:/etc/nginx/sites-available$ sudo nginx -t
+
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+ubuntu@ip-172-31-2-37:/etc/nginx/sites-available$ sudo systemctl reload nginx
+
+500 Internal Server Error nginx/1.24.0 (Ubuntu)
+(Give Path as well) path /home/ubuntu/AgentWiz-React/dist 
+Give me permission command, sudo chown and chmod ? )chat gpt
+
+For secure certificate
+sudo certbot --nginx -d  agentwiz.thefabulousshow.com
+
+Add email and yes to all
+
+log check command for nginix for 50 lines
+sudo tail -n 50 -f /var/log/nginx/error.log( for 500 error)
+
+
+Backeend
+git clone (backend file)
+docker compose up --build -d   (-d detahced mode)
+nano .env (if needed for credential)
