@@ -36,8 +36,8 @@ services:
       - ORDS_PWD=SecretPassword123!
       - APEX_IMAGES=/opt/oracle/apex/images # ✅ Important
     volumes:
-      - ords-config:/etc/ords/config # ✅ Correct path
-      - apex-images:/opt/oracle/apex/images # ✅ Same images volume
+      - ords-config:/opt/oracle/ords/config
+      - apex-images:/opt/oracle/ords/config/ords/standalone/deployments/i
     depends_on:
       database:
         condition: service_healthy
