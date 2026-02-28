@@ -29,9 +29,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - ORACLE_HOST=database
-      - ORACLE_PORT=1521
-      - ORACLE_SERVICE=XEPDB1
+      - DBHOST=database
+      - DBPORT=1521
+      - DBSERVICENAME=XEPDB1
       - ORACLE_PWD=SecretPassword123!
       - ORDS_PWD=SecretPassword123!
       - ORDS_CONFIG=/etc/ords/config
