@@ -24,25 +24,25 @@
       start_period: 10m
 
   ords:
-  image: container-registry.oracle.com/database/ords:latest
-  container_name: oracle-ords
-  ports:
-    - "8080:8080"
-  environment:
-    - DBHOST=database
-    - DBPORT=1521
-    - DBSERVICENAME=XEPDB1
-    - ORACLE_PWD=SecretPassword123!
-    - ORDS_PWD=SecretPassword123!
-    - APEX_IMAGES=/opt/oracle/apex/images   # ✅ Important
-  volumes:
-    - ords-config:/etc/ords/config          # ✅ Correct path
-    - apex-images:/opt/oracle/apex/images   # ✅ Same images volume
-  depends_on:
-    database:
-      condition: service_healthy
-  networks:
-    - apex-network
+    image: container-registry.oracle.com/database/ords:latest
+    container_name: oracle-ords
+    ports:
+      - "8080:8080"
+    environment:
+      - DBHOST=database
+      - DBPORT=1521
+      - DBSERVICENAME=XEPDB1
+      - ORACLE_PWD=SecretPassword123!
+      - ORDS_PWD=SecretPassword123!
+      - APEX_IMAGES=/opt/oracle/apex/images   # ✅ Important
+    volumes:
+      - ords-config:/etc/ords/config          # ✅ Correct path
+      - apex-images:/opt/oracle/apex/images   # ✅ Same images volume
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - apex-network
 
 volumes:
   oracle-data:
