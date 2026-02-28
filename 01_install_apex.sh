@@ -13,7 +13,7 @@ curl -o /opt/oracle/apex-latest.zip -L https://download.oracle.com/otn_software/
 cd /opt/oracle
 
 echo "Extracting APEX..."
-unzip -q apex-latest.zip
+unzip -qo apex-latest.zip
 rm apex-latest.zip
 
 cd apex

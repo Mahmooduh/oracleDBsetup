@@ -2,7 +2,9 @@ FROM gvenzl/oracle-xe:21
 
 USER root
 RUN microdnf install -y unzip curl && \
-    microdnf clean all
+    microdnf clean all && \
+    mkdir -p /opt/oracle/apex/images && \
+    chown -R oracle:dba /opt/oracle/apex
 
 # Copy the initialization script to the directory where gvenzl/oracle-xe executes them on first startup
 COPY 01_install_apex.sh /container-entrypoint-initdb.d/01_install_apex.sh

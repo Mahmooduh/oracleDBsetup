@@ -13,6 +13,7 @@ services:
       - APP_USER_PASSWORD=SecretPassword123!
     volumes:
       - oracle-data:/opt/oracle/oradata
+      - apex-images:/opt/oracle/apex/images
     networks:
       - apex-network
     healthcheck:
@@ -35,6 +36,7 @@ services:
       - ORDS_PWD=SecretPassword123!
     volumes:
       - ords-config:/opt/oracle/ords/config
+      - apex-images:/opt/oracle/ords/config/ords/standalone/deployments/i
     depends_on:
       database:
         condition: service_healthy
@@ -44,6 +46,7 @@ services:
 volumes:
   oracle-data:
   ords-config:
+  apex-images:
 
 networks:
   apex-network:
