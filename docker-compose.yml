@@ -1,6 +1,6 @@
 services:
   database:
-    build:
+    build: 
       context: .
       dockerfile: Dockerfile.db
     container_name: oracle-21c-apex
@@ -13,11 +13,10 @@ services:
       - APP_USER_PASSWORD=SecretPassword123!
     volumes:
       - oracle-data:/opt/oracle/oradata
-      - apex-images:/opt/oracle/apex/images
     networks:
       - apex-network
     healthcheck:
-      test: [ "CMD", "healthcheck.sh" ]
+      test: ["CMD", "healthcheck.sh"]
       interval: 1m
       timeout: 30s
       retries: 3
@@ -34,34 +33,17 @@ services:
       - DBSERVICENAME=XEPDB1
       - ORACLE_PWD=SecretPassword123!
       - ORDS_PWD=SecretPassword123!
-      - APEX_IMAGES=/opt/oracle/apex/images # ✅ Important
     volumes:
       - ords-config:/opt/oracle/ords/config
-      - apex-images:/opt/oracle/ords/config/ords/standalone/deployments/i
     depends_on:
       database:
         condition: service_healthy
     networks:
       - apex-network
-    command: >
-      bash -c " if [ -z \"\$(ls -A /etc/ords/config)\" ]; then
-        echo 'Initializing ORDS configuration...';
-        ords install \
-          --admin-user SYS \
-          --db-hostname database \
-          --db-port 1521 \
-          --db-servicename XEPDB1 \
-          --feature-db-api true \
-          --feature-rest-enabled-sql true \
-          --feature-sdw true \
-          --password-stdin <<EOF
-      SecretPassword123! SecretPassword123! EOF fi; ords --config /etc/ords/config serve "
 
 volumes:
   oracle-data:
   ords-config:
-  apex-images:
-
 
 networks:
   apex-network:
