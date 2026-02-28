@@ -43,6 +43,19 @@ services:
         condition: service_healthy
     networks:
       - apex-network
+    command: >
+      bash -c " if [ -z \"\$(ls -A /etc/ords/config)\" ]; then
+        echo 'Initializing ORDS configuration...';
+        ords install \
+          --admin-user SYS \
+          --db-hostname database \
+          --db-port 1521 \
+          --db-servicename XEPDB1 \
+          --feature-db-api true \
+          --feature-rest-enabled-sql true \
+          --feature-sdw true \
+          --password-stdin <<EOF
+      SecretPassword123! SecretPassword123! EOF fi; ords --config /etc/ords/config serve "
 
 volumes:
   oracle-data:
